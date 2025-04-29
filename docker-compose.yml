@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  heic-converter-web:
+    build: .
+    platform: linux/amd64
+    ports:
+      - "5010:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+    restart: unless-stopped
+    
+  heic-converter:
+    build: .
+    platform: linux/amd64
+    volumes:
+      - ./data:/app/data
+    entrypoint: ["python", "convert_urls_to_images.py"]
+    command: ["/app/data/input.xlsx", "/app/data/output.xlsx"]
+    profiles: ["cli"]
