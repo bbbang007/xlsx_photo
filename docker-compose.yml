@@ -10,10 +10,11 @@ services:
       - ./outputs:/app/outputs
     restart: unless-stopped
     
+  # CLI工具服务，默认不启动
+  # 需要手动使用 docker-compose run heic-converter 来运行
   heic-converter:
     build: .
     volumes:
       - ./data:/app/data
     entrypoint: ["python", "convert_urls_to_images.py"]
     command: ["/app/data/input.xlsx", "/app/data/output.xlsx"]
-    profiles: ["cli"]
