@@ -3,7 +3,6 @@ version: '3'
 services:
   heic-converter-web:
     build: .
-    platform: linux/amd64
     ports:
       - "5010:5000"
     volumes:
@@ -13,7 +12,6 @@ services:
     
   heic-converter:
     build: .
-    platform: linux/amd64
     volumes:
       - ./data:/app/data
     entrypoint: ["python", "convert_urls_to_images.py"]
